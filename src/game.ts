@@ -1,20 +1,40 @@
 import * as PIXI from 'pixi.js'
-import fishImage from "./images/fish.png"
-import bubbleImage from "./images/bubble.png"
-import waterImage from "./images/water.jpg"
+import bomImage from "./images/bom.png"
+import planeImage from "./images/plane.png"
+import cloudImage from "./images/wolken.jpg"
+import { Bom } from "./bom"
+import { Plane } from "./plane"
+
+class game {
+    pixi : PIXI.Application
+    loader : PIXI.Loader
+    plane : Plane
+    bom : Bom[]=[]
+
+constructor(){
+    this.pixi = new PIXI.Application({ width: 1500, height: 700 })
+    const pixiCanvas = document.getElementById("pixi-canvas")
+   
+    if (pixiCanvas != null) {
+        pixiCanvas.appendChild(this.pixi.view)
+    }
 
 
-const pixi = new PIXI.Application({ width: 800, height: 450 })
-document.body.appendChild(pixi.view)
+    this.loader = new PIXI.Loader()
+    this.loader.add('bomTexture', bomImage)
+        .add('planeTexture', planeImage)
+        .add('cloudTexture', cloudImage)
+    this.loader.load(()=> this.loadCompleted())
 
-const loader = new PIXI.Loader()
-loader.add('fishTexture', fishImage)
-      .add('bubbleTexture', bubbleImage)
-      .add('waterTexture', waterImage)
-loader.load(()=>loadCompleted())
-
-
-function loadCompleted() {
-    let fish = new PIXI.Sprite(loader.resources["fishTexture"].texture!)
-    pixi.stage.addChild(fish)
 }
+
+loadCompleted(){
+    let bg = new PIXI.TilingSprite(this.loader.resources["cloudTexture"].texture!, 1200, 700)
+    this.pixi.stage.addChild(bg)
+    bg.scale.set (1.4) 
+}
+
+
+}
+
+let g = new game()
