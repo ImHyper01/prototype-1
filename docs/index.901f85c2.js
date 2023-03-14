@@ -524,7 +524,6 @@ var _wolkenJpg = require("./images/wolken.jpg");
 var _wolkenJpgDefault = parcelHelpers.interopDefault(_wolkenJpg);
 var _plane = require("./plane");
 class game {
-    bom = [];
     constructor(){
         this.pixi = new _pixiJs.Application({
             width: 1500,
@@ -543,6 +542,11 @@ class game {
         bg.scale.set(1.4);
         this.plane = new _plane.Plane(this.loader.resources["planeTexture"].texture);
         this.pixi.stage.addChild(this.plane);
+        this.pixi.ticker.add(()=>this.update()
+        );
+    }
+    update() {
+        this.plane.thrive();
     }
 }
 let g = new game();
@@ -37094,6 +37098,48 @@ parcelHelpers.export(exports, "Plane", ()=>Plane
 );
 var _pixiJs = require("pixi.js");
 class Plane extends _pixiJs.Sprite {
+    xspeed = 0;
+    yspeed = 0;
+    constructor(texture){
+        super(texture);
+        this.xspeed = 0;
+        this.yspeed = 0;
+        this.x = 100;
+        this.y = 100;
+        this.scale.set(1.7);
+        window.addEventListener("keydown", (e)=>this.onKeyDown(e)
+        );
+        window.addEventListener("keyup", (e)=>this.onKeyUp(e)
+        );
+    }
+    thrive() {
+        this.x += this.xspeed;
+        this.y += this.yspeed;
+    }
+    onKeyDown(e) {
+        switch(e.key.toUpperCase()){
+            case "W":
+            case "ARROWUP":
+                console.log("W");
+                this.yspeed = -7;
+                break;
+            case "S":
+            case "ARROWDOWN":
+                console.log("S");
+                this.yspeed = 7;
+                break;
+        }
+    }
+    onKeyUp(e) {
+        switch(e.key.toUpperCase()){
+            case "W":
+            case "S":
+            case "ARROWUP":
+            case "ARROWDOWN":
+                this.yspeed = 0;
+                break;
+        }
+    }
 }
 
 },{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fpRtI","edeGs"], "edeGs", "parcelRequirea0e5")

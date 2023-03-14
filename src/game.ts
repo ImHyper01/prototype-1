@@ -9,7 +9,7 @@ class game {
     pixi : PIXI.Application
     loader : PIXI.Loader
     plane : Plane
-    bom : Bom[]=[]
+    bom : Bom
 
 constructor(){
     this.pixi = new PIXI.Application({ width: 1500, height: 700 })
@@ -33,10 +33,16 @@ loadCompleted(){
     this.pixi.stage.addChild(bg)
     bg.scale.set (1.4) 
 
-    this.plane = new Plane (this.loader.resources["planeTexture"].texture)
+    this.plane = new Plane (this.loader.resources["planeTexture"].texture!)
     this.pixi.stage.addChild(this.plane)
+
+    this.pixi.ticker.add(() => this.update())
+    
 }
 
+update(){
+    this.plane.thrive()
+}
 
 }
 
