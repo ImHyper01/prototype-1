@@ -32,6 +32,9 @@ loadCompleted(){
     let bg = new PIXI.TilingSprite(this.loader.resources["cloudTexture"].texture!, 1200, 700)
     this.pixi.stage.addChild(bg)
     bg.scale.set (1.4) 
+
+    this.plane = new Plane (this.loader.resources["planeTexture"].texture)
+    this.pixi.stage.addChild(this.plane)
 }
 
 

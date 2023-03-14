@@ -522,6 +522,7 @@ var _planePng = require("./images/plane.png");
 var _planePngDefault = parcelHelpers.interopDefault(_planePng);
 var _wolkenJpg = require("./images/wolken.jpg");
 var _wolkenJpgDefault = parcelHelpers.interopDefault(_wolkenJpg);
+var _plane = require("./plane");
 class game {
     bom = [];
     constructor(){
@@ -540,11 +541,13 @@ class game {
         let bg = new _pixiJs.TilingSprite(this.loader.resources["cloudTexture"].texture, 1200, 700);
         this.pixi.stage.addChild(bg);
         bg.scale.set(1.4);
+        this.plane = new _plane.Plane(this.loader.resources["planeTexture"].texture);
+        this.pixi.stage.addChild(this.plane);
     }
 }
 let g = new game();
 
-},{"pixi.js":"dsYej","./images/bom.png":"7ua4X","./images/plane.png":"5sI41","./images/wolken.jpg":"hO0sz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dsYej":[function(require,module,exports) {
+},{"pixi.js":"dsYej","./images/bom.png":"7ua4X","./images/plane.png":"5sI41","./images/wolken.jpg":"hO0sz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./plane":"fpgx3"}],"dsYej":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "utils", ()=>_utils
@@ -37084,6 +37087,15 @@ module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "plane.
 },{"./helpers/bundle-url":"lgJ39"}],"hO0sz":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "wolken.97def4da.jpg" + "?" + Date.now();
 
-},{"./helpers/bundle-url":"lgJ39"}]},["fpRtI","edeGs"], "edeGs", "parcelRequirea0e5")
+},{"./helpers/bundle-url":"lgJ39"}],"fpgx3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Plane", ()=>Plane
+);
+var _pixiJs = require("pixi.js");
+class Plane extends _pixiJs.Sprite {
+}
+
+},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fpRtI","edeGs"], "edeGs", "parcelRequirea0e5")
 
 //# sourceMappingURL=index.901f85c2.js.map
